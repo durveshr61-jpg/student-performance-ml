@@ -2,7 +2,7 @@
 
 Welcome to my machine learning competition! Can you build the best model to predict whether a student will Pass (1) or Fail (0)?
 
-### 🏆 View the Live Leaderboard here: [Insert Your GitHub Pages URL Here]
+### 🏆 View the Live Leaderboard here: https://chaitanyameher.github.io/student-performance-ml/
 
 ### 🚀 How to Participate:
 1. **Download the Data:** Download `train.csv` to train your model, and `test.csv` to make your predictions.
