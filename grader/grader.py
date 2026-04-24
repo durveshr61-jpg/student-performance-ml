@@ -25,7 +25,6 @@ sub_df = pd.read_csv(sub_files[0])
 # 4. Compare and Grade!
 try:
     # Ensure both dataframes are sorted so rows match up perfectly
-    # (Assuming your test.csv has an 'id' column and a 'result' column)
     truth_df = truth_df.sort_values("id")
     sub_df = sub_df.sort_values("id")
 
