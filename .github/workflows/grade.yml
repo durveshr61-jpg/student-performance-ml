@@ -33,7 +33,16 @@ jobs:
         run: pip install pandas scikit-learn
 
       - name: Write secret labels to file
-        run: echo "${{ secrets.TEST_LABELS }}" > grader/test_labels.csv
+        run: printf '%s' "$TEST_LABELS" > grader/test_labels.csv
+        env:
+          TEST_LABELS: ${{ secrets.TEST_LABELS }}
+
+      - name: Debug labels file
+        run: |
+          echo "Lines in test_labels.csv:"
+          wc -l grader/test_labels.csv
+          echo "First 3 lines:"
+          head -3 grader/test_labels.csv
 
       - name: Check submission file exists
         run: |
@@ -50,7 +59,7 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           python grader/grader.py | tee grader_output.txt
-          python3 - <<'EOF'
+          python3 - <<'PYEOF'
           import json, os
 
           result_path = "leaderboard_data/result.json"
@@ -80,7 +89,7 @@ jobs:
           with open(lb_path, "w") as f:
               json.dump(lb, f, indent=2)
           print("Leaderboard saved!")
-          EOF
+          PYEOF
 
       - name: Commit and push leaderboard
         run: |
