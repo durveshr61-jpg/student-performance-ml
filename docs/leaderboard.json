@@ -3,5 +3,10 @@
     "group": "chaitanyagmeher-ctrl",
     "f1_score": 0.9403,
     "accuracy": 0.8987
+  },
+  {
+    "group": "Anvay14",
+    "f1_score": 0.9403,
+    "accuracy": 0.8987
   }
 ]
