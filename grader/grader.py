@@ -14,19 +14,18 @@ if not os.path.exists(truth_file):
     exit(1)
 
 truth_df = pd.read_csv(truth_file)
-truth_df.columns = truth_df.columns.str.strip()  # remove any whitespace from column names
+# If no 'id' column, create one from row index
+if 'id' not in truth_df.columns:
+    truth_df['id'] = range(1, len(truth_df) + 1)
 truth_df['id'] = truth_df['id'].astype(int)
 
 print(f"✅ Loaded answer key: {len(truth_df)} rows, columns: {truth_df.columns.tolist()}")
 
 # 3. Find student submission
 sub_files = glob.glob("submission/*.csv")
-if not sub_files:
-    print("❌ Error: No CSV file found in the submission folder.")
-    exit(1)
-
-sub_df = pd.read_csv(sub_files[0])
-sub_df.columns = sub_df.columns.str.strip()  # remove any whitespace from column names
+# If no 'id' column, create one from row index
+if 'id' not in sub_df.columns:
+    sub_df['id'] = range(1, len(sub_df) + 1)
 sub_df['id'] = sub_df['id'].astype(int)
 
 print(f"✅ Loaded submission: {len(sub_df)} rows, columns: {sub_df.columns.tolist()}")
